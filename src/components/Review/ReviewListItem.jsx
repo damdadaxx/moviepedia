@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Modal from "./Modal";
-import ReviewForm from "./ReviewForm";
-import Button from "./Button";
 import styles from "./ReviewListItem.module.css";
+import ReviewForm from "./ReviewForm";
+import Button from "../Button/Button";
+import Modal from "../Modal/Modal";
 
 export default function ReviewListItem({ item, onUpdate, onDelete }) {
   const dateString = new Date(item.createdAt).toLocaleDateString();

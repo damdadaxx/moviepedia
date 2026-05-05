@@ -1,10 +1,12 @@
 import { useState } from "react";
-import ReviewList from "./components/ReviewList";
+
 import mockItems from "./mock.json";
-import Modal from "./components/Modal";
-import ReviewForm from "./components/ReviewForm";
-import Button from "./components/Button";
-import Layout from "./components/Layout";
+import Layout from "./components/Layout/Layout";
+import Modal from "./components/Modal/Modal";
+import Button from "./components/Button/Button";
+import ReviewList from "./components/Review/ReviewList";
+import ReviewForm from "./components/Review/ReviewForm";
+
 import styles from "./App.module.css";
 
 function App() {

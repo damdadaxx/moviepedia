@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from "react";
-import Button from "./Button";
-import placeholderImage from "../assets/placeholder.png";
+import { useEffect, useRef } from "react";
+import placeholderImage from "../../assets/placeholder.png";
 import styles from "./ReviewForm.module.css";
-import Input from "./Input";
-import Select from "./Select";
-import Textarea from "./Textarea";
+import Button from "../Button/Button";
+import Input from "../FormControls/Input";
+import Select from "../FormControls/Select";
+import Textarea from "../FormControls/Textarea";
 
 export default function ReviewForm({
   review = { title: "", imgUrl: "", rating: 1, content: "" },
