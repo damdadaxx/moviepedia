@@ -8,11 +8,16 @@ import ReviewList from "./components/Review/ReviewList";
 import ReviewForm from "./components/Review/ReviewForm";
 
 import styles from "./App.module.css";
+import useTranslate from "./hooks/useTranslate";
 
 function App() {
+  const t = useTranslate();
+
   const [items, setItems] = useState(mockItems);
   const [order, setOrder] = useState("createdAt");
   const [isCreateReviewOpen, setIsCreateReviewOpen] = useState(false);
+
+  const sortedItems = items.sort((a, b) => b[order] - a[order]);
 
   const handleCreate = (data) => {
     const now = new Date();
@@ -51,8 +56,6 @@ function App() {
     setItems(nextItems);
   };
 
-  const sortedItems = items.sort((a, b) => b[order] - a[order]);
-
   return (
     <Layout className={styles.main}>
       <header className={styles.header}>
@@ -61,19 +64,21 @@ function App() {
             variant={order === "createdAt" ? "primary" : "ghost"}
             onClick={() => setOrder("createdAt")}
           >
-            최신순
+            {t("sort by latest")}
           </Button>
           <Button
             variant={order === "rating" ? "primary" : "ghost"}
             onClick={() => setOrder("rating")}
           >
-            베스트순
+            {t("sort by best")}
           </Button>
         </div>
-        <Button onClick={() => setIsCreateReviewOpen(true)}>추가하기</Button>
+        <Button onClick={() => setIsCreateReviewOpen(true)}>
+          {t("create button")}
+        </Button>
       </header>
       <Modal
-        title='리뷰 생성'
+        title={`${t("create review title")}`}
         isOpen={isCreateReviewOpen}
         onClose={() => setIsCreateReviewOpen(false)}
       >

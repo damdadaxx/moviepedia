@@ -3,10 +3,14 @@ import styles from "./ReviewListItem.module.css";
 import ReviewForm from "./ReviewForm";
 import Button from "../Button/Button";
 import Modal from "../Modal/Modal";
+import useTranslate from "../../hooks/useTranslate";
 
 export default function ReviewListItem({ item, onUpdate, onDelete }) {
-  const dateString = new Date(item.createdAt).toLocaleDateString();
+  const t = useTranslate();
+
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  const dateString = new Date(item.createdAt).toLocaleDateString();
 
   const handleEditFormSubmit = (data) => {
     onUpdate(item.id, data);
@@ -25,15 +29,15 @@ export default function ReviewListItem({ item, onUpdate, onDelete }) {
         <p className={styles.content}>{item.content}</p>
         <div className={styles.buttons}>
           <Button variant='ghost' onClick={() => setIsEditModalOpen(true)}>
-            수정
+            {t("edit button")}
           </Button>
           <Button variant='danger' onClick={() => onDelete(item.id)}>
-            삭제
+            {t("delete button")}
           </Button>
         </div>
       </div>
       <Modal
-        title='리뷰 생성'
+        title={`${t("create review title")}`}
         isOpen={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}
       >
