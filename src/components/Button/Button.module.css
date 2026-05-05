@@ -1,5 +1,6 @@
 .button {
   border: none;
+  cursor: pointer;
 }
 
 .primary {
@@ -23,4 +24,15 @@
   font-weight: 600;
   color: red;
   background-color: transparent;
+}
+
+/* 더보기 버튼 */
+.loadMore {
+  width: calc(100% - 40px);
+  height: 68px;
+  margin: 0 20px;
+  letter-spacing: -0.282px;
+  border-top: 1px solid #e0e0e0;
+  color: #020101;
+  background: #fff;
 }

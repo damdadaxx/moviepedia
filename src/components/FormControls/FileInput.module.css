@@ -1,0 +1,20 @@
+.container {
+  position: relative;
+}
+
+.preview {
+  width: 182px;
+  height: 263px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.clear {
+  position: absolute;
+  top: 9px;
+  right: 9px;
+  padding: 7px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}

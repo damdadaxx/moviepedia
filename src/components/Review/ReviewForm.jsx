@@ -1,11 +1,11 @@
 import { useEffect, useRef } from "react";
-import placeholderImage from "../../assets/placeholder.png";
 import styles from "./ReviewForm.module.css";
 import Button from "../Button/Button";
 import Input from "../FormControls/Input";
 import Select from "../FormControls/Select";
 import Textarea from "../FormControls/Textarea";
 import useTranslate from "../../hooks/useTranslate";
+import FileInput from "../FormControls/FileInput";
 
 export default function ReviewForm({
   review = { title: "", imgUrl: "", rating: 1, content: "" },
@@ -15,11 +15,11 @@ export default function ReviewForm({
 
   const inputRef = useRef(null);
 
-  const submit = (formData) => {
-    // fromEntries() : JS 객체로 변환
-    const data = Object.fromEntries(formData.entries());
-    onSubmit(data);
-  };
+  // const submit = (formData) => {
+  //   // fromEntries() : JS 객체로 변환
+  //   const data = Object.fromEntries(formData.entries());
+  //   onSubmit(data);
+  // };
 
   useEffect(() => {
     if (inputRef.current) {
@@ -28,13 +28,9 @@ export default function ReviewForm({
   }, []);
 
   return (
-    <form className={styles.form} action={submit}>
+    <form className={styles.form} action={onSubmit}>
       <div className={styles.inner}>
-        <img
-          className={styles.image}
-          src={placeholderImage}
-          alt={review.title}
-        />
+        <FileInput name='imgFile' initialPreview={review.imgUrl} />
         <div className={styles.content}>
           <div className={styles.titleRating}>
             <Input
