@@ -1,0 +1,26 @@
+.button {
+  border: none;
+}
+
+.primary {
+  width: 138px;
+  height: 45px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 0 24px;
+  color: #fff;
+  background-color: #000;
+}
+
+.ghost {
+  font-size: 16px;
+  font-weight: 600;
+  background-color: transparent;
+}
+
+.danger {
+  font-size: 16px;
+  font-weight: 600;
+  color: red;
+  background-color: transparent;
+}

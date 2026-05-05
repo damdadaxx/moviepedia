@@ -1,0 +1,44 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.form .button {
+  margin-left: auto;
+}
+
+.inner {
+  display: flex;
+  gap: 20px;
+}
+
+.image {
+  width: 182px;
+  height: 262px;
+  flex-shrink: 0;
+  border-radius: 15px;
+}
+
+.content {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.titleRating {
+  display: flex;
+  gap: 20px;
+}
+
+.textarea {
+  flex-grow: 1;
+}
+
+.button {
+  align-self: flex-end;
+}
+
+.title {
+  flex-grow: 1;
+}

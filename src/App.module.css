@@ -1,0 +1,9 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 23px;
+}
+
+.orderBtns button:not(:first-child) {
+  margin-left: 20px;
+}

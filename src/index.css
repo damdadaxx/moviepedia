@@ -1,0 +1,8 @@
+:root {
+  --z-index-modal: 1000;
+  --z-index-gnb: 900;
+  --z-index-footer: 900;
+}
+body {
+  font-family: "Apple SD Gothic Neo";
+}
