@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useActionState, useEffect, useRef } from "react";
 import styles from "./ReviewForm.module.css";
 import Button from "../Button/Button";
 import Input from "../FormControls/Input";
@@ -15,6 +15,23 @@ export default function ReviewForm({
 
   const inputRef = useRef(null);
 
+  /*
+  - state: 현재 error 상태 참조
+  - formAction: action 값
+  - isPending: 제출중인지의 상태값
+  */
+  const [state, formAction, isPending] = useActionState(
+    async (prevState, data) => {
+      try {
+        await onSubmit(data);
+        return { error: null };
+      } catch (error) {
+        return { error };
+      }
+    },
+    { error: null },
+  );
+
   // const submit = (formData) => {
   //   // fromEntries() : JS 객체로 변환
   //   const data = Object.fromEntries(formData.entries());
@@ -28,7 +45,7 @@ export default function ReviewForm({
   }, []);
 
   return (
-    <form className={styles.form} action={onSubmit}>
+    <form className={styles.form} action={formAction}>
       <div className={styles.inner}>
         <FileInput name='imgFile' initialPreview={review.imgUrl} />
         <div className={styles.content}>
@@ -56,7 +73,10 @@ export default function ReviewForm({
           />
         </div>
       </div>
-      <Button className={styles.button}>{t("submit button")}</Button>
+      <Button className={styles.button} disabled={isPending}>
+        {t("submit button")}
+      </Button>
+      {state.error && <div>오류가 발생했습니다.</div>}
     </form>
   );
 }

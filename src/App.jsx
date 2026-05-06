@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import useTranslate from "./hooks/useTranslate";
 import axios from "./utils/axios";
@@ -20,23 +20,39 @@ function App() {
   const [order, setOrder] = useState("createdAt");
   const [isCreateReviewOpen, setIsCreateReviewOpen] = useState(false);
   const [hasNext, setHasNext] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   // const sortedItems = items.sort((a, b) => b[order] - a[order]);
 
-  const handleLoad = async (orderParams) => {
+  const handleLoad = useCallback(async (orderParams) => {
     const response = await axios.get("/film-reviews", {
       params: { order: orderParams, limit: LIMIT },
     });
     const { reviews, paging } = response.data;
     setItems(reviews);
     setHasNext(paging.hasNext);
-  };
+  }, []);
 
   const handleLoadMore = async () => {
-    const response = await axios.get("/film-reviews", {
-      params: { order, offset: items.length, limit: LIMIT },
-    });
-    const { reviews, paging } = response.data;
+    let data = null;
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const response = await axios.get("/film-reviewsㄴ", {
+        params: { order, offset: items.length, limit: LIMIT },
+      });
+      data = response.data;
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
+
+    if (!data) return;
+
+    const { reviews, paging } = data;
     setItems((prevItems) => [...prevItems, ...reviews]);
     setHasNext(paging.hasNext);
     // setItems([...items, ...reviews]); // 비동기 상태에서 최신 값을 참조 어려움
@@ -83,7 +99,7 @@ function App() {
 
   useEffect(() => {
     handleLoad(order);
-  }, [order]);
+  }, [order, handleLoad]);
 
   return (
     <Layout className={styles.main}>
@@ -114,10 +130,15 @@ function App() {
           onDelete={handleDelete}
         />
         {hasNext && (
-          <Button variant='loadMore' onClick={handleLoadMore}>
+          <Button
+            variant='loadMore'
+            disabled={isLoading}
+            onClick={handleLoadMore}
+          >
             더보기
           </Button>
         )}
+        {error && <div>오류가 발생했습니다.</div>}
       </div>
 
       <Modal
